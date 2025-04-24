@@ -5,12 +5,12 @@ import base64
 from datetime import datetime
 
 def main():
-    st.title("File Classification App")
+    st.title("Aplicación de Clasificación de Archivos")
     
-    st.write("Upload multiple files and classify them using the provided options.")
+    st.write("Sube múltiples archivos y clasifícalos usando las opciones proporcionadas.")
     
     # Create a file uploader that accepts multiple files of any type
-    uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Selecciona archivos", accept_multiple_files=True)
     
     # Define the classification options and normalize them (remove accents)
     options = [
@@ -31,14 +31,14 @@ def main():
     ]
     
     if uploaded_files:
-        st.success(f"{len(uploaded_files)} file(s) uploaded successfully!")
+        st.success(f"{len(uploaded_files)} archivo(s) subido(s) con éxito!")
         
         # Sort files alphabetically by name
         sorted_files = sorted(uploaded_files, key=lambda x: x.name.lower())
         
         # Create a form for checkboxes
         with st.form("classification_form"):
-            st.subheader("Select options for each file:")
+            st.subheader("Selecciona opciones para cada archivo:")
             
             # Dictionary to store selections for each file
             selections = {}
@@ -60,7 +60,7 @@ def main():
                 st.divider()
             
             # Submit button
-            submit_button = st.form_submit_button("Generate JSON")
+            submit_button = st.form_submit_button("Generar JSON")
             
             if submit_button:
                 # Create a timestamp for the filename
@@ -76,17 +76,17 @@ def main():
                 
                 # Display JSON content in the app
                 json_str = json.dumps(selections, ensure_ascii=False, indent=4)
-                st.text_area("JSON Content", json_str, height=300)
+                st.text_area("Contenido JSON", json_str, height=300)
                 
                 # Create a download link using HTML
                 json_bytes = json_str.encode('utf-8')
                 b64 = base64.b64encode(json_bytes).decode()
-                href = f'<a href="data:file/txt;base64,{b64}" download="{json_filename}" target="_blank">Download JSON as text file</a>'
+                href = f'<a href="data:file/txt;base64,{b64}" download="{json_filename}" target="_blank">Descargar archivo JSON</a>'
                 st.markdown(href, unsafe_allow_html=True)
                 
-                st.success(f"JSON file '{json_filename}' created successfully at {abs_path}!")
+                st.success(f"¡Archivo JSON '{json_filename}' creado con éxito en {abs_path}!")
     else:
-        st.info("No files uploaded yet. Please upload some files to classify.")
+        st.info("No hay archivos subidos aún. Por favor, sube algunos archivos para clasificarlos.")
 
 if __name__ == "__main__":
     main()

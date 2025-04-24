@@ -12,22 +12,22 @@ def main():
     # Create a file uploader that accepts multiple files of any type
     uploaded_files = st.file_uploader("Choose files", accept_multiple_files=True)
     
-    # Define the classification options
+    # Define the classification options and normalize them (remove accents)
     options = [
-        "Atención al cliente",
+        "Atencion al cliente",
         "Calidad de productos",
-        "Descripción de producto",
-        "Facturación",
+        "Descripcion de producto",
+        "Error de la pagina",
+        "Facturacion",
+        "Opciones de pago",
+        "Pagina lenta",
+        "Precio Alto",
         "Proceso dificil",
         "Recogo en tienda",
         "Servicio de entrega",
         "Stock de productos",
         "Transparencia en compra en mini cuotas",
-        "Variedad de productos",
-        "Pagina lenta",
-        "Error de la pagina",
-        "Opciones de pago",
-        "Precio Alto"
+        "Variedad de productos"
     ]
     
     if uploaded_files:

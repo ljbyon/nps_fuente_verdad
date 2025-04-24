@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import os
+import base64
 from datetime import datetime
 
 def main():
@@ -74,7 +75,14 @@ def main():
                 abs_path = os.path.abspath(json_filename)
                 
                 # Display JSON content in the app
-                st.text_area("JSON Content", json.dumps(selections, ensure_ascii=False, indent=4), height=300)
+                json_str = json.dumps(selections, ensure_ascii=False, indent=4)
+                st.text_area("JSON Content", json_str, height=300)
+                
+                # Create a download link using HTML
+                json_bytes = json_str.encode('utf-8')
+                b64 = base64.b64encode(json_bytes).decode()
+                href = f'<a href="data:file/txt;base64,{b64}" download="{json_filename}" target="_blank">Download JSON as text file</a>'
+                st.markdown(href, unsafe_allow_html=True)
                 
                 st.success(f"JSON file '{json_filename}' created successfully at {abs_path}!")
     else:

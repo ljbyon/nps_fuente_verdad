@@ -5,7 +5,7 @@ import base64
 from datetime import datetime
 
 def main():
-    st.title("Aplicación de Clasificación de Archivos")
+    st.title("App para Clasificar Audio de NPS")
     
     st.write("Sube múltiples archivos y clasifícalos usando las opciones proporcionadas.")
     

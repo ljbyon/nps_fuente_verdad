@@ -70,18 +70,13 @@ def main():
                 with open(json_filename, "w", encoding="utf-8") as json_file:
                     json.dump(selections, json_file, ensure_ascii=False, indent=4)
                 
-                # Provide download link
-                with open(json_filename, "r", encoding="utf-8") as f:
-                    json_content = f.read()
+                # Show the path where the file was saved
+                abs_path = os.path.abspath(json_filename)
                 
-                st.download_button(
-                    label="Download JSON file",
-                    data=json_content,
-                    file_name=json_filename,
-                    mime="application/json"
-                )
+                # Display JSON content in the app
+                st.text_area("JSON Content", json.dumps(selections, ensure_ascii=False, indent=4), height=300)
                 
-                st.success(f"JSON file '{json_filename}' created successfully!")
+                st.success(f"JSON file '{json_filename}' created successfully at {abs_path}!")
     else:
         st.info("No files uploaded yet. Please upload some files to classify.")
 
